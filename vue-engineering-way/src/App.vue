@@ -1,17 +1,39 @@
 <script setup>
-    
+import { ref } from 'vue';
+
+    const images = [
+		'https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa0f9be4b071da45d9a0c2.jpg',
+		'https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa0fa3e4b071da45d9a0c3.jpg',
+		'https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa10ace4b071da45d9a0c4.jpg'
+	]
+
+  const i = ref(0)
+
+  const prev = () => {
+    i.value++
+    if (i.value == images.length) {
+      i.value = 0
+    }
+  }
+
+  const next = () => {
+    i.value--
+    if (i.value < 0) {
+      i.value = images.length - 1
+    }
+  }
 </script>
 
 
 <template>
 <div class='bit-banner'>
-  <img src="https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa10ace4b071da45d9a0c4.jpg" 
+  <img :src="images[i]" 
   alt="比特轮播图" />
 
   <div class="ctrl">
-    <a href="javascript:;" class="btn pre">&lt;</a>
+    <a href="javascript:;" class="btn pre" @click="prev">&lt;</a>
 
-    <a href="javascript:;" class="btn next">&gt;</a>
+    <a href="javascript:;" class="btn next" @click="next">&gt;</a>
   </div>
 
 </div>
