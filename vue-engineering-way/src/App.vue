@@ -1,72 +1,61 @@
 <script setup>
 import { ref } from 'vue';
 
-    const images = [
-		'https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa0f9be4b071da45d9a0c2.jpg',
-		'https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa0fa3e4b071da45d9a0c3.jpg',
-		'https://bit-1256306791.cos.ap-chengdu.myqcloud.com/fffa10ace4b071da45d9a0c4.jpg'
-	]
+  const flag = ref(true)
 
-  const i = ref(0)
-
-  const prev = () => {
-    i.value++
-    if (i.value == images.length) {
-      i.value = 0
-    }
-  }
-
-  const next = () => {
-    i.value--
-    if (i.value < 0) {
-      i.value = images.length - 1
-    }
-  }
 </script>
-
-
-<template>
-<div class='bit-banner'>
-  <img :src="images[i]" 
-  alt="比特轮播图" />
-
-  <div class="ctrl">
-    <a href="javascript:;" class="btn pre" @click="prev">&lt;</a>
-
-    <a href="javascript:;" class="btn next" @click="next">&gt;</a>
+ <template>
+  <h3>可折叠⾯板</h3>
+  <div class="panel">
+    <div class="title">
+      <h4>⾃由与爱情</h4>
+      <span class="btn" @click="flag = !flag"> {{ flag ? "收起" : "展开" }} </span>
+    </div>
+    <div class="container" v-show="flag">
+      <p>⽣命诚可贵 ,</p>
+      <p>爱情价更⾼。</p>
+      <p>若为⾃由故，</p>
+      <p>两者皆可抛。</p>
+    </div>
   </div>
-
-</div>
 </template>
-
-
-<style scoped>
-
-  .bit-banner {
-    position: relative;
-    width: 1200px;
-    height: 337px;
-    margin: 150px auto;
+ <style lang="scss">
+body {
+  background-color: #ccc;
+}
+#app {
+  width: 400px;
+  margin: 20px auto;
+  padding: 1em 2em 2em;
+  border: 4px solid green;
+  border-radius: 1em;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+}
+#app h3 {
+  text-align: center;
+}
+.panel {
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+    border: 1px solid #ccc;
   }
-
-  .bit-banner .ctrl .btn {
-		position: absolute;
-		top: 50%;
-		width: 30px;
-		height: 30px;
-		margin-top: -15px;
-		font-size: 14px;
-		line-height: 30px;
-		text-align: center;
-		border-radius: 50%;
-		background: rgba(0, 0, 0, 0.3);
-	}
-
-  .bit-banner .ctrl .btn.prev {
-		left: 15px;
-	}
-
-	.bit-banner .ctrl .btn.next {
-		right: 15px;
-	}
+  .title h4 {
+    line-height: 2;
+    margin: 0;
+  }
+  .container {
+    border: 1px solid #ccc;
+    padding: 0 1em;
+  }
+  .btn {
+    /* 
+⿏标改成⼿的形状
+ */
+    cursor: pointer;
+  }
+}
 </style>
