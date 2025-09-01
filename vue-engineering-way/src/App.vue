@@ -1,61 +1,66 @@
+
 <script setup>
 import { ref } from 'vue';
 
-  const flag = ref(true)
+const goodsList = ref([
+		{ id: 101, name: 'biangbiang面', price: 13 },
+		{ id: 102, name: '葫芦头', price: 20 },
+		{ id: 103, name: '冰峰', price: 2 },
+		{ id: 104, name: '肉夹馍', price: 11 },
+		{ id: 105, name: '羊肉泡馍', price: 18 }
+	])
 
+    const del = (i) => {
+      if (window.confirm("确认删除吗？")) {
+        goodsList.value.splice(i,1)
+      }
+    }
 </script>
- <template>
-  <h3>可折叠⾯板</h3>
-  <div class="panel">
-    <div class="title">
-      <h4>⾃由与爱情</h4>
-      <span class="btn" @click="flag = !flag"> {{ flag ? "收起" : "展开" }} </span>
-    </div>
-    <div class="container" v-show="flag">
-      <p>⽣命诚可贵 ,</p>
-      <p>爱情价更⾼。</p>
-      <p>若为⾃由故，</p>
-      <p>两者皆可抛。</p>
-    </div>
-  </div>
+
+<template>
+<table border="1" cellspacing="0" cellpadding="0">
+  <caption>
+    <h3>橱窗</h3>
+  </caption>
+  <thead>
+    <tr>
+      <th>商品名称</th>
+      <th>商品价值</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(item, index) in goodsList">
+      <th>{{ item.name }}</th>
+      <th>{{ item.price }}</th>
+      <th>
+        <button @click="del(index)">删除</button>
+      </th>
+    </tr>
+  </tbody>
+  <tfoot v-if="goodsList.length === 0">
+			<tr>
+				<td colspan="3">暂无数据啦</td>
+			</tr>
+		</tfoot>
+</table>
 </template>
- <style lang="scss">
-body {
-  background-color: #ccc;
-}
-#app {
-  width: 400px;
-  margin: 20px auto;
-  padding: 1em 2em 2em;
-  border: 4px solid green;
-  border-radius: 1em;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-  background-color: #fff;
-}
-#app h3 {
+
+
+<style lang="scss">
+table{
+  width: 500px;
+  margin: 150px auto;
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+
+		tr {
+			height: 40px;
+		}
+
+		tfoot {
+			height: 100px;
+		}
 }
-.panel {
-  .title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1em;
-    border: 1px solid #ccc;
-  }
-  .title h4 {
-    line-height: 2;
-    margin: 0;
-  }
-  .container {
-    border: 1px solid #ccc;
-    padding: 0 1em;
-  }
-  .btn {
-    /* 
-⿏标改成⼿的形状
- */
-    cursor: pointer;
-  }
-}
+
 </style>
